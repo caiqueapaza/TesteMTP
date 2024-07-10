@@ -1,0 +1,47 @@
+<mat-card>
+<form [formGroup]="taskForm" (ngSubmit)="submit()" #formDir="ngForm">
+<div class="input_box">
+    <mat-form-field>
+        <mat-label for="">Descrição</mat-label>
+        <input matInput type="text" formControlName="strDescription" placeholder="Insira a descrição" mat-card-content>
+    </mat-form-field>
+</div>
+<div class="input_box">
+    <mat-form-field>
+        <mat-label for="">Data da tarefa</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dtTask">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
+<div class="btn-box">
+    <button 
+        type="submit" 
+        [disabled]="!taskForm.valid" 
+        mat-raised-button 
+        disabled
+        matTooltip="Favor incluir a descrição e a data.">Incluir tarefa</button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+        <th>Descrição</th>
+        <th>Data Tarefa</th>
+        <th>Status</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let task of tasks">
+        <tr>
+            <td>{{task.strDescription}}</td>
+            <td>{{task.dtTask}}</td>
+            <td>{{task.idStatus}}</td>
+            <td>
+                <button mat-flat-button>Concluir</button>
+                <button mat-flat-button (click)="OpenDialog()">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
